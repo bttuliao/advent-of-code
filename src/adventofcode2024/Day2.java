@@ -25,6 +25,7 @@ public class Day2 {
 		boolean isIncreasing = false;
 		boolean initialCheck = true;
 		int countOfSafeReport = 1;
+		int unsafeCount = 0;
 		
 		// determines if report is all increasing or all decreasing
 		for (int i = 0; i < currentReport.size() - 1; i++) {
@@ -34,9 +35,9 @@ public class Day2 {
 			} else if (initialCheck && (currentReport.get(i) > currentReport.get(i + 1))) {
 				initialCheck = false;
 			} else if (isIncreasing && (currentReport.get(i) > currentReport.get(i + 1))) {
-				return 0;
+				unsafeCount++;
 			} else if (!isIncreasing && (currentReport.get(i) < currentReport.get(i + 1))) {
-				return 0;
+				unsafeCount++;
 			} 
 		}
 		
@@ -44,9 +45,14 @@ public class Day2 {
 		for (int i = 0 ; i < currentReport.size() - 1; i++) {
 			if ((Math.abs(currentReport.get(i) - currentReport.get(i + 1)) > 3 || 
 					Math.abs(currentReport.get(i) - currentReport.get(i + 1)) < 1)) {
-				countOfSafeReport = 0;
+				unsafeCount++;
 			}
 		}
+		
+		if (unsafeCount > 1) {
+			countOfSafeReport = 0;
+		}
+		
 		return countOfSafeReport;
 	}
 }
